@@ -1,0 +1,6 @@
+@Dragon.BlackProject.AuthServer_HostAddress = http://localhost:5018
+
+GET {{Dragon.BlackProject.AuthServer_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
