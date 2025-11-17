@@ -1,5 +1,7 @@
+using Dragon.BlackProject.ApiServer.Utils.AuthorizationExt;
 using Dragon.BlackProject.ApiServer.Utils.Filter;
 using Dragon.BlackProject.ApiServer.Utils.SwaggerExt;
+using Microsoft.OpenApi;
 using Serilog;
 using System.Text;
 
@@ -17,12 +19,30 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Host.UseSerilog();
-builder.Services.AddControllers(options=>
+builder.AuthorizationExt();
+builder.Services.AddControllers(options =>
 {
     options.Filters.Add<CustomAsyncExceptionFilter>();
 });
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddVersionedSwagger();
+builder.Services.AddVersionedSwagger(options =>
+{
+   
+        options.AddSecurityDefinition("bearer", new OpenApiSecurityScheme
+        {
+            Type = SecuritySchemeType.Http,
+            Scheme = "bearer",
+            BearerFormat = "JWT",
+            Description = "JWT Authorization header using the Bearer scheme."
+        });
+        options.AddSecurityRequirement(document => new OpenApiSecurityRequirement
+        {
+            [new OpenApiSecuritySchemeReference("bearer", document)] = []
+        });
+   
+
+});
+
 
 var app = builder.Build();
 
@@ -33,7 +53,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

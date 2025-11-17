@@ -1,4 +1,6 @@
 using Dragon.BlackProject.Common;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Dragon.BlackProject.ApiServer.Controllers
@@ -25,12 +27,13 @@ namespace Dragon.BlackProject.ApiServer.Controllers
         /// <returns>天气的信息</returns>
         
         [HttpGet(Name = "GetWeatherForecast")]
+        [Authorize]
         public async Task<JsonResult> Get()
         {
 
-            int b = 0;
-            int a = 1 / b;
-            var data = Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            
+            var data = Enumerable.Range(1, 5).Select(index => new 
+            WeatherForecast
             {
                 Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
                 TemperatureC = Random.Shared.Next(-20, 55),

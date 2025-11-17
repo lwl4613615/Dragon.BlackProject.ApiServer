@@ -1,3 +1,6 @@
+using Dragon.BlackProject.AuthServer.Utils.Services.JwtService;
+using Dragon.BlackProject.Common.Jwt;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +9,9 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+// ÃÌº”JwtOptions≈‰÷√
+builder.Services.Configure<JwtTokenOptions>(builder.Configuration.GetSection("JWTTokenOptions"));
+builder.Services.AddSingleton<CustomJWTService, CustomHSJWTService>();
 
 var app = builder.Build();
 
@@ -15,6 +21,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 
 app.UseHttpsRedirection();
 

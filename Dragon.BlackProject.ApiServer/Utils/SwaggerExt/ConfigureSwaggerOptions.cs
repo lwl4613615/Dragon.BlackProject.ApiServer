@@ -19,7 +19,7 @@ namespace Dragon.BlackProject.ApiServer.Utils.SwaggerExt
         {
             foreach (var description in _provider.ApiVersionDescriptions)
             {
-                options.SwaggerDoc(description.GroupName, new Microsoft.OpenApi.Models.OpenApiInfo()
+                options.SwaggerDoc(description.GroupName, new Microsoft.OpenApi.OpenApiInfo()
                 {
                     Title = $"God CedricDadi API {description.ApiVersion}",
                     Version = description.ApiVersion.ToString(),
