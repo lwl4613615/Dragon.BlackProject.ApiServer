@@ -1,26 +1,26 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36623.8
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dragon.BlackProject.ApiServer", "Dragon.BlackProject.ApiServer\Dragon.BlackProject.ApiServer.csproj", "{67E61A5C-8516-437F-80D8-F281A0AE3737}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dragon.BlackProject.ApiServer", "Dragon.BlackProject.ApiServer\Dragon.BlackProject.ApiServer.csproj", "{67E61A5C-8516-437F-80D8-F281A0AE3737}"
 	ProjectSection(ProjectDependencies) = postProject
 		{2907D61B-2AD0-4D96-9A92-F5E639CEA64C} = {2907D61B-2AD0-4D96-9A92-F5E639CEA64C}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dragon.BlackProject.AuthServer", "Dragon.BlackProject.AuthServer\Dragon.BlackProject.AuthServer.csproj", "{2B7C0731-F4EA-45C5-84AD-523AE01B015A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dragon.BlackProject.AuthServer", "Dragon.BlackProject.AuthServer\Dragon.BlackProject.AuthServer.csproj", "{2B7C0731-F4EA-45C5-84AD-523AE01B015A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dragon.BlackProject.Common", "Dragon.BlackProject.Common\Dragon.BlackProject.Common.csproj", "{2907D61B-2AD0-4D96-9A92-F5E639CEA64C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dragon.BlackProject.Common", "Dragon.BlackProject.Common\Dragon.BlackProject.Common.csproj", "{2907D61B-2AD0-4D96-9A92-F5E639CEA64C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dragon.BlackProject.Models", "Dragon.BlackProject.Models\Dragon.BlackProject.Models.csproj", "{F3D8A243-078C-474F-82E1-8069DD3C1A91}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dragon.BlackProject.Models", "Dragon.BlackProject.Models\Dragon.BlackProject.Models.csproj", "{F3D8A243-078C-474F-82E1-8069DD3C1A91}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dragon.BlackProject.ModelDtos", "Dragon.BlackProject.ModelDtos\Dragon.BlackProject.ModelDtos.csproj", "{D9C2B903-7A0F-49B5-8A4F-F40608EDB199}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dragon.BlackProject.ModelDtos", "Dragon.BlackProject.ModelDtos\Dragon.BlackProject.ModelDtos.csproj", "{D9C2B903-7A0F-49B5-8A4F-F40608EDB199}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dragon.BlackProject.BusinessInterface", "Dragon.BlackProject.BusinessInterface\Dragon.BlackProject.BusinessInterface.csproj", "{35559356-991B-4C12-A4F8-C64AB0C23813}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dragon.BlackProject.BusinessInterface", "Dragon.BlackProject.BusinessInterface\Dragon.BlackProject.BusinessInterface.csproj", "{35559356-991B-4C12-A4F8-C64AB0C23813}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dragon.BlackProject.BussinessService", "Dragon.BlackProject.BussinessService\Dragon.BlackProject.BussinessService.csproj", "{DBF55DB7-70C1-4F05-82F8-115C158D1F87}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dragon.BlackProject.BussinessService", "Dragon.BlackProject.BussinessService\Dragon.BlackProject.BussinessService.csproj", "{DBF55DB7-70C1-4F05-82F8-115C158D1F87}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dragon.BlackProject.VueWeb", "Dragon.BlackProject.VueWeb\Dragon.BlackProject.VueWeb.csproj", "{3FF1D462-81BF-4D2D-AE65-6228CF315F36}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dragon.BlackProject.VueWeb", "Dragon.BlackProject.VueWeb\Dragon.BlackProject.VueWeb.csproj", "{3FF1D462-81BF-4D2D-AE65-6228CF315F36}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
