@@ -1,7 +1,10 @@
-﻿using Dragon.BlackProject.Common.Jwt;
+﻿using Dragon.BlackProject.Common;
+using Dragon.BlackProject.Common.Jwt;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Dragon.BlackProject.ApiServer.Utils.AuthorizationExt
 {
@@ -52,14 +55,41 @@ namespace Dragon.BlackProject.ApiServer.Utils.AuthorizationExt
                 // 添加事件处理
                 options.Events = new JwtBearerEvents
                 {
-                    OnAuthenticationFailed = context =>
-                    {
-                        if (context.Exception.GetType() == typeof(SecurityTokenExpiredException))
+
+                    /// <summary>
+                    ///  处理认证失败的情况，例如令牌无效或过期
+                    ///  </summary>    
+                    OnChallenge = async context => {
+          
+                        context.HandleResponse();
+                        var payload = JsonSerializer.Serialize(ApiResult<string>.Fail(ApiCode.Unauthorized,401),new JsonSerializerOptions
                         {
-                            context.Response.Headers.Append("Token-Expired", "true");
-                        }
-                        return Task.CompletedTask;
+                            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                            Encoder=System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+                        });  
+                        context.Response.ContentType = "application/json;charset=utf-8";
+                        context.Response.StatusCode = StatusCodes.Status200OK;
+                        await context.Response.WriteAsync(payload);     
+
+                    },
+                    /// <summary>
+                    /// 处理没有权限访问资源的情况
+                    /// </summary> 
+                    OnForbidden = async context =>
+                    {                        
+                        var payload = JsonSerializer.Serialize(ApiResult<string>.Fail(ApiCode.Forbidden, "对不起，你没有权限访问该URL."), new JsonSerializerOptions
+                        {
+                            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                            Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+                        });
+                        context.Response.ContentType = "application/json;charset=utf-8";
+                        context.Response.StatusCode = StatusCodes.Status200OK;
+                        await context.Response.WriteAsync(payload);
+
                     }
+
+
+
                 };
             });
 
