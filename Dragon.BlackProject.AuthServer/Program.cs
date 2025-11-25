@@ -1,3 +1,4 @@
+using Dragon.BlackProject.AuthServer.Utils.InitDatabaseExt;
 using Dragon.BlackProject.AuthServer.Utils.Services.JwtService;
 using Dragon.BlackProject.Common.Jwt;
 
@@ -12,7 +13,7 @@ builder.Services.AddSwaggerGen();
 // ÃÌº”JwtOptions≈‰÷√
 builder.Services.Configure<JwtTokenOptions>(builder.Configuration.GetSection("JWTTokenOptions"));
 builder.Services.AddSingleton<CustomJWTService, CustomHSJWTService>();
-
+builder.InitSqlSugar();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
