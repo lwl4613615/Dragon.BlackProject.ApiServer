@@ -1,0 +1,209 @@
+-- 0. 清理旧表 (如果存在)
+DROP TABLE IF EXISTS sys_userrolemap, sys_usermenumap, sys_userbtnmap, sys_user, sys_rolemenumap, sys_rolebtnmap, sys_role, sys_menu, sys_button CASCADE;
+
+-- 1. 创建表结构 (全小写)
+
+-- Table: sys_button
+CREATE TABLE sys_button (
+    id uuid NOT NULL,
+    parentid uuid NOT NULL,
+    btntext varchar(255) NOT NULL,
+    btnvalue varchar(255) NOT NULL,
+    icon varchar(255) NULL,
+    size varchar(255) NULL,
+    backcolor varchar(255) NULL,
+    description varchar(255) NULL,
+    createtime timestamp NOT NULL,
+    modifytime timestamp NULL,
+    status int NOT NULL,
+    CONSTRAINT pk_sys_button_id PRIMARY KEY (id)
+);
+
+-- Table: sys_menu
+CREATE TABLE sys_menu (
+    id uuid NOT NULL,
+    parentid uuid NOT NULL,
+    menutext varchar(255) NOT NULL,
+    menutype int NOT NULL,
+    icon varchar(255) NULL,
+    weburlname varchar(255) NULL,
+    weburl varchar(255) NULL,
+    vuefilepath varchar(255) NULL,
+    isleafnode boolean NOT NULL,
+    orderby int NOT NULL,
+    createtime timestamp NOT NULL,
+    modifytime timestamp NULL,
+    status int NOT NULL,
+    CONSTRAINT pk_sys_menu_id PRIMARY KEY (id)
+);
+
+-- Table: sys_role
+CREATE TABLE sys_role (
+    roleid SERIAL NOT NULL,
+    rolename varchar(255) NOT NULL,
+    status int NOT NULL,
+    createtime timestamp NOT NULL,
+    modifytime timestamp NULL,
+    CONSTRAINT pk_sys_role_roleid PRIMARY KEY (roleid)
+);
+
+-- Table: sys_rolebtnmap
+CREATE TABLE sys_rolebtnmap (
+    id SERIAL NOT NULL,
+    roleid int NOT NULL,
+    btnid uuid NOT NULL,
+    createtime timestamp NOT NULL,
+    modifytime timestamp NULL,
+    status int NOT NULL,
+    CONSTRAINT pk_sys_rolebtnmap_id PRIMARY KEY (id)
+);
+
+-- Table: sys_rolemenumap
+CREATE TABLE sys_rolemenumap (
+    id SERIAL NOT NULL,
+    roleid int NOT NULL,
+    menuid uuid NOT NULL,
+    createtime timestamp NOT NULL,
+    modifytime timestamp NULL,
+    status int NOT NULL,
+    CONSTRAINT pk_sys_rolemenumap_id PRIMARY KEY (id)
+);
+
+-- Table: sys_user
+CREATE TABLE sys_user (
+    userid SERIAL NOT NULL,
+    name varchar(255) NOT NULL,
+    password varchar(255) NOT NULL,
+    usertype int NULL,
+    phone varchar(255) NULL,
+    mobile varchar(255) NULL,
+    address varchar(255) NULL,
+    email varchar(255) NULL,
+    qq varchar(255) NOT NULL,
+    wechat varchar(255) NULL,
+    sex int NOT NULL,
+    imageurl varchar(255) NULL,
+    lastlogintime timestamp NOT NULL,
+    createtime timestamp NOT NULL,
+    modifytime timestamp NULL,
+    status int NOT NULL,
+    CONSTRAINT pk_sys_user_userid PRIMARY KEY (userid)
+);
+
+-- Table: sys_userbtnmap
+CREATE TABLE sys_userbtnmap (
+    id SERIAL NOT NULL,
+    userid int NOT NULL,
+    btnid uuid NOT NULL,
+    createtime timestamp NOT NULL,
+    modifytime timestamp NULL,
+    status int NOT NULL,
+    CONSTRAINT pk_sys_userbtnmap_id PRIMARY KEY (id)
+);
+
+-- Table: sys_usermenumap
+CREATE TABLE sys_usermenumap (
+    id SERIAL NOT NULL,
+    userid int NOT NULL,
+    menuid uuid NOT NULL,
+    createtime timestamp NOT NULL,
+    modifytime timestamp NULL,
+    status int NOT NULL,
+    CONSTRAINT pk_sys_usermenumap_id PRIMARY KEY (id)
+);
+
+-- Table: sys_userrolemap
+CREATE TABLE sys_userrolemap (
+    id SERIAL NOT NULL,
+    userid int NOT NULL,
+    roleid int NOT NULL,
+    createtime timestamp NOT NULL,
+    modifytime timestamp NULL,
+    status int NOT NULL,
+    CONSTRAINT pk_sys_userrolemap_id PRIMARY KEY (id)
+);
+
+
+-- 2. 插入数据 (列名全小写)
+
+INSERT INTO sys_button (id, parentid, btntext, btnvalue, icon, size, backcolor, description, createtime, modifytime, status) VALUES 
+('11dae8f4-23d8-4a39-aa76-07482e5b9b3d', '2831cc51-9c40-448f-a82c-8fa71da0767a', '修改按钮', 'menu-updatebtn', 'Edit', 'small', 'default', '修改按钮', '2024-09-06 12:11:31.120', '1900-01-01 00:00:00.000', 1),
+('87b48cec-f9e5-4f4d-b072-080740b46b18', 'a88231ee-bd8a-4726-97c2-c4084a29bf84', '删除', 'role-deleterole', 'DeleteFilled', 'small', 'danger', '删除角色信息', '2024-09-06 12:11:31.120', '1900-01-01 00:00:00.000', 1),
+('13cfc3d2-aa07-40a9-b318-09093d7a4fa1', 'a88231ee-bd8a-4726-97c2-c4084a29bf84', '设置菜单', 'role-setrolemenus', 'Switch', 'small', 'info', '设置角色菜单', '2024-09-06 12:11:31.120', '1900-01-01 00:00:00.000', 1),
+('98849f8e-aa7f-435f-9ed3-0f1a937a0f6e', 'f4277822-bbf5-4807-9897-2ff6bc5ece07', '解冻', 'user-normaluser', 'WarnTriangleFilled', 'small', 'success', '解冻用户', '2024-09-06 12:11:31.120', '1900-01-01 00:00:00.000', 1),
+('4984f249-53ce-4e07-9654-14705f07c48e', 'f4277822-bbf5-4807-9897-2ff6bc5ece07', '分配菜单', 'user-setusermenuandbtn', 'Tools', 'small', 'info', '设置用户菜单', '2024-09-06 12:11:31.120', '1900-01-01 00:00:00.000', 1),
+('e5e3eb12-b184-490e-a2f0-2e3db9998cf8', 'a88231ee-bd8a-4726-97c2-c4084a29bf84', '查询', 'role-getrolepage', 'Search', 'default', 'default', '角色分页列表', '2024-09-06 12:11:31.120', '1900-01-01 00:00:00.000', 1),
+('bd97ed0c-9f63-4b39-8f3c-3d811f1d15df', 'f4277822-bbf5-4807-9897-2ff6bc5ece07', '删除', 'user-deleteuser', 'DeleteFilled', 'small', 'danger', '删除用户信息', '2024-09-06 12:11:31.120', '1900-01-01 00:00:00.000', 1),
+('3e8fe98a-667c-41f4-ac38-4db50ea43e9c', 'f4277822-bbf5-4807-9897-2ff6bc5ece07', '查询', 'user-getuserpage', 'Search', 'default', 'primary', '用户分页列表', '2024-09-06 12:11:31.120', '1900-01-01 00:00:00.000', 1),
+('deacf60e-2251-4bce-96b8-53a8e11f5567', '2831cc51-9c40-448f-a82c-8fa71da0767a', '查询', 'menu-getmenutreepage', 'Search', 'default', 'default', '查询按钮', '2024-09-06 12:11:31.120', '1900-01-01 00:00:00.000', 1),
+('2313a9f1-b1d8-4a58-82a8-591d2467a9e0', 'f4277822-bbf5-4807-9897-2ff6bc5ece07', '编辑', 'user-putuser', 'Edit', 'small', 'primary', '修改用户信息', '2024-09-06 12:11:31.120', '1900-01-01 00:00:00.000', 1),
+('1dc2dac9-f3cc-4e45-b892-67f865aa1cb7', '2831cc51-9c40-448f-a82c-8fa71da0767a', '修改', 'menu-updatemenu', 'Edit', 'small', 'success', '修改菜单', '2024-09-06 12:11:31.120', '1900-01-01 00:00:00.000', 1),
+('8d070f2b-63b0-45dc-b20a-6a5eb8087a14', 'f4277822-bbf5-4807-9897-2ff6bc5ece07', '分配角色', 'user-setuserrole', 'Share', 'small', 'warning', '设置用户角色', '2024-09-06 12:11:31.120', '1900-01-01 00:00:00.000', 1),
+('3ca08e9c-428f-4133-84e9-8871808f46dd', 'a88231ee-bd8a-4726-97c2-c4084a29bf84', '新增', 'role-addrole', 'CirclePlusFilled', 'default', 'primary', '新增角色信息', '2024-09-06 12:11:31.120', '1900-01-01 00:00:00.000', 1),
+('96b68bb5-18ea-49cd-9b1a-98ec77323eb2', '2831cc51-9c40-448f-a82c-8fa71da0767a', '新增', 'menu-addmenu', 'CirclePlusFilled', 'default', 'default', '新增菜单', '2024-09-06 12:11:31.120', '1900-01-01 00:00:00.000', 1),
+('453373b6-c786-478c-aeda-a243c732c227', 'a88231ee-bd8a-4726-97c2-c4084a29bf84', '批量分配角色', 'role-batchsetuserrole', 'Switch', 'small', 'success', '批量分配用户角色', '2024-09-06 12:11:31.120', '1900-01-01 00:00:00.000', 1),
+('773d0448-9220-425e-bca0-c734232fda98', 'a88231ee-bd8a-4726-97c2-c4084a29bf84', '修改角色信息', 'role-putrole', 'Edit', 'small', 'success', '修改角色信息', '2024-09-06 12:11:31.120', '1900-01-01 00:00:00.000', 1),
+('be1c1f63-621e-4582-ac24-c8d1e3803a86', 'f4277822-bbf5-4807-9897-2ff6bc5ece07', '冻结', 'user-frozenuser', 'Lock', 'small', 'warning', '冻结用户', '2024-09-06 12:11:31.120', '1900-01-01 00:00:00.000', 1),
+('6651c69e-2a36-4e5e-8b56-cca8d6a617cb', '2831cc51-9c40-448f-a82c-8fa71da0767a', '删除', 'menu-deletemenu', 'DeleteFilled', 'small', 'danger', '删除菜单', '2024-09-06 12:11:31.120', '1900-01-01 00:00:00.000', 1),
+('8893a9cb-81e0-43e7-bf4c-d63cce4dcdf3', 'f4277822-bbf5-4807-9897-2ff6bc5ece07', '添加用户', 'user-adduser', 'CirclePlusFilled', 'default', 'default', '添加用户', '2024-09-06 12:11:31.120', '1900-01-01 00:00:00.000', 1);
+
+INSERT INTO sys_menu (id, parentid, menutext, menutype, icon, weburlname, weburl, vuefilepath, isleafnode, orderby, createtime, modifytime, status) VALUES 
+('f4277822-bbf5-4807-9897-2ff6bc5ece07', '00000000-0000-0000-0000-000000000000', '用户管理', 1, 'UserFilled', 'user', '/user', '../views/Home/user/info/index.vue', true, 0, '2024-09-06 12:11:31.000', '2024-09-06 12:15:54.457', 1),
+('2831cc51-9c40-448f-a82c-8fa71da0767a', '00000000-0000-0000-0000-000000000000', '菜单管理', 1, 'Menu', 'menu', '/menu', '../views/Home/menu/info/index.vue', true, 1, '2024-09-06 12:11:30.000', '2024-09-06 12:15:46.900', 1),
+('a88231ee-bd8a-4726-97c2-c4084a29bf84', '00000000-0000-0000-0000-000000000000', '角色管理', 1, 'Share', 'role', '/role', '../views/Home/role/info/index.vue', true, 2, '2024-09-06 12:11:31.000', '2024-09-06 12:16:09.920', 1);
+
+INSERT INTO sys_role (roleid, rolename, status, createtime, modifytime) VALUES 
+(1, '校长', 1, '2024-09-06 12:25:17.443', '1900-01-01 00:00:00.000');
+
+INSERT INTO sys_rolebtnmap (id, roleid, btnid, createtime, modifytime, status) VALUES 
+(1, 1, '98849f8e-aa7f-435f-9ed3-0f1a937a0f6e', '2024-09-06 13:05:10.953', '1900-01-01 00:00:00.000', 0),
+(2, 1, '4984f249-53ce-4e07-9654-14705f07c48e', '2024-09-06 13:05:10.953', '1900-01-01 00:00:00.000', 0),
+(3, 1, 'bd97ed0c-9f63-4b39-8f3c-3d811f1d15df', '2024-09-06 13:05:10.953', '1900-01-01 00:00:00.000', 0),
+(4, 1, '3e8fe98a-667c-41f4-ac38-4db50ea43e9c', '2024-09-06 13:05:10.953', '1900-01-01 00:00:00.000', 0),
+(5, 1, '2313a9f1-b1d8-4a58-82a8-591d2467a9e0', '2024-09-06 13:05:10.953', '1900-01-01 00:00:00.000', 0),
+(6, 1, '8d070f2b-63b0-45dc-b20a-6a5eb8087a14', '2024-09-06 13:05:10.953', '1900-01-01 00:00:00.000', 0);
+
+INSERT INTO sys_rolemenumap (id, roleid, menuid, createtime, modifytime, status) VALUES 
+(1, 1, 'f4277822-bbf5-4807-9897-2ff6bc5ece07', '2024-09-06 13:05:10.937', '1900-01-01 00:00:00.000', 0);
+
+INSERT INTO sys_user (userid, name, password, usertype, phone, mobile, address, email, qq, wechat, sex, imageurl, lastlogintime, createtime, modifytime, status) VALUES 
+(1, 'zhaoxi-admin', 'e10adc3949ba59abbe56e057f20f883e', 1, NULL, NULL, NULL, NULL, '1234567', NULL, 1, 'FileUpload\NoImg.jpg', '2024-09-06 15:41:51.523', '2024-09-06 11:17:51.600', '1900-01-01 00:00:00.000', 1),
+(2, 'richard', 'c4ca4238a0b923820dcc509a6f75849b', 2, '18672713698', '18672713698', '18672713698@163.com', '18672713698@163.com', '18672713698', '18672713698', 1, 'FileUpload\2024-09-06\20240906121902_f110133d-ad34-4cec-b272-c6381f6cafdf.png', '1900-01-01 00:00:00.000', '2024-09-06 12:20:41.317', '2024-09-06 14:52:20.510', 1);
+
+INSERT INTO sys_userbtnmap (id, userid, btnid, createtime, modifytime, status) VALUES 
+(96, 1, '11dae8f4-23d8-4a39-aa76-07482e5b9b3d', '2024-09-06 12:11:37.617', '2024-09-06 12:11:37.617', 1),
+(97, 1, '87b48cec-f9e5-4f4d-b072-080740b46b18', '2024-09-06 12:11:37.617', '2024-09-06 12:11:37.617', 1),
+(98, 1, '13cfc3d2-aa07-40a9-b318-09093d7a4fa1', '2024-09-06 12:11:37.617', '2024-09-06 12:11:37.617', 1),
+(99, 1, '98849f8e-aa7f-435f-9ed3-0f1a937a0f6e', '2024-09-06 12:11:37.617', '2024-09-06 12:11:37.617', 1),
+(100, 1, '4984f249-53ce-4e07-9654-14705f07c48e', '2024-09-06 12:11:37.617', '2024-09-06 12:11:37.617', 1),
+(101, 1, 'e5e3eb12-b184-490e-a2f0-2e3db9998cf8', '2024-09-06 12:11:37.617', '2024-09-06 12:11:37.617', 1),
+(102, 1, 'bd97ed0c-9f63-4b39-8f3c-3d811f1d15df', '2024-09-06 12:11:37.617', '2024-09-06 12:11:37.617', 1),
+(103, 1, '3e8fe98a-667c-41f4-ac38-4db50ea43e9c', '2024-09-06 12:11:37.617', '2024-09-06 12:11:37.617', 1),
+(104, 1, 'deacf60e-2251-4bce-96b8-53a8e11f5567', '2024-09-06 12:11:37.617', '2024-09-06 12:11:37.617', 1),
+(105, 1, '2313a9f1-b1d8-4a58-82a8-591d2467a9e0', '2024-09-06 12:11:37.617', '2024-09-06 12:11:37.617', 1),
+(106, 1, '1dc2dac9-f3cc-4e45-b892-67f865aa1cb7', '2024-09-06 12:11:37.617', '2024-09-06 12:11:37.617', 1),
+(107, 1, '8d070f2b-63b0-45dc-b20a-6a5eb8087a14', '2024-09-06 12:11:37.617', '2024-09-06 12:11:37.617', 1),
+(108, 1, '3ca08e9c-428f-4133-84e9-8871808f46dd', '2024-09-06 12:11:37.617', '2024-09-06 12:11:37.617', 1),
+(109, 1, '96b68bb5-18ea-49cd-9b1a-98ec77323eb2', '2024-09-06 12:11:37.617', '2024-09-06 12:11:37.617', 1),
+(110, 1, '453373b6-c786-478c-aeda-a243c732c227', '2024-09-06 12:11:37.617', '2024-09-06 12:11:37.617', 1),
+(111, 1, '773d0448-9220-425e-bca0-c734232fda98', '2024-09-06 12:11:37.617', '2024-09-06 12:11:37.617', 1),
+(112, 1, 'be1c1f63-621e-4582-ac24-c8d1e3803a86', '2024-09-06 12:11:37.617', '2024-09-06 12:11:37.617', 1),
+(113, 1, '6651c69e-2a36-4e5e-8b56-cca8d6a617cb', '2024-09-06 12:11:37.617', '2024-09-06 12:11:37.617', 1),
+(114, 1, '8893a9cb-81e0-43e7-bf4c-d63cce4dcdf3', '2024-09-06 12:11:37.617', '2024-09-06 12:11:37.617', 1);
+
+INSERT INTO sys_usermenumap (id, userid, menuid, createtime, modifytime, status) VALUES 
+(16, 1, 'f4277822-bbf5-4807-9897-2ff6bc5ece07', '2024-09-06 12:11:37.610', '2024-09-06 12:11:37.610', 1),
+(17, 1, '2831cc51-9c40-448f-a82c-8fa71da0767a', '2024-09-06 12:11:37.610', '2024-09-06 12:11:37.610', 1),
+(18, 1, 'a88231ee-bd8a-4726-97c2-c4084a29bf84', '2024-09-06 12:11:37.610', '2024-09-06 12:11:37.610', 1);
+
+INSERT INTO sys_userrolemap (id, userid, roleid, createtime, modifytime, status) VALUES 
+(1, 2, 1, '2024-09-06 14:08:49.627', '1900-01-01 00:00:00.000', 0);
+
+-- 3. 重置自增序列 (序列名也转为小写)
+SELECT setval('sys_role_roleid_seq', (SELECT MAX(roleid) FROM sys_role));
+SELECT setval('sys_rolebtnmap_id_seq', (SELECT MAX(id) FROM sys_rolebtnmap));
+SELECT setval('sys_rolemenumap_id_seq', (SELECT MAX(id) FROM sys_rolemenumap));
+SELECT setval('sys_user_userid_seq', (SELECT MAX(userid) FROM sys_user));
+SELECT setval('sys_userbtnmap_id_seq', (SELECT MAX(id) FROM sys_userbtnmap));
+SELECT setval('sys_usermenumap_id_seq', (SELECT MAX(id) FROM sys_usermenumap));
+SELECT setval('sys_userrolemap_id_seq', (SELECT MAX(id) FROM sys_userrolemap));
