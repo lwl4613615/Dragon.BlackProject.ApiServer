@@ -11,9 +11,9 @@ namespace Dragon.BlackProject.AuthServer.Utils.InitDatabaseExt
           {
               var config = new ConnectionConfig()
               {
-                  ConnectionString = dbconfig.ConnectionString,
+                  ConnectionString = dbconfig?.DefaultConnection,
                   DbType = (DbType)Enum.Parse(typeof(DbType), dbconfig.DbType),
-                  IsAutoCloseConnection = dbconfig.IsAutoCloseConnection,
+                  IsAutoCloseConnection = dbconfig.IsAutoCloseConnection,                  
               };
               var sqlSugar = new SqlSugarScope(config, db =>
               {
@@ -26,6 +26,7 @@ namespace Dragon.BlackProject.AuthServer.Utils.InitDatabaseExt
                           Console.WriteLine("---------------------------------");
                       };
                   }
+               
               });
 
               return sqlSugar;

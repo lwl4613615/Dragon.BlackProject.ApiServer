@@ -4,4 +4,11 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Dragon.BlackProject.ModelDtos\Dragon.BlackProject.ModelDtos.csproj" />
+    <ProjectReference Include="..\Dragon.BlackProject.Models\Dragon.BlackProject.Models.csproj" />
+  </ItemGroup>
 </Project>

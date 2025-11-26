@@ -8,7 +8,8 @@
         Unauthorized = 401,
         Forbidden = 403,
         BadRequest = 400,
-        InternalServerError = 500
+        InternalServerError = 500,
+        InvalidUserNameOrPassword=1001
     }
     public static class ApiMessageCatalog
     {
@@ -21,6 +22,7 @@
             [ApiCode.Forbidden] = "禁止访问",
             [ApiCode.BadRequest] = "错误的请求",
             [ApiCode.InternalServerError] = "服务器内部错误",
+            [ApiCode.InvalidUserNameOrPassword]= "无效的用户名或密码"
 
         };
         public static string ResolveMessage(ApiCode code)

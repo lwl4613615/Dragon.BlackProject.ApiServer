@@ -1,6 +1,8 @@
 using Dragon.BlackProject.AuthServer.Utils.InitDatabaseExt;
 using Dragon.BlackProject.AuthServer.Utils.Services.JwtService;
+using Dragon.BlackProject.BusinessInterface.Map;
 using Dragon.BlackProject.Common.Jwt;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +15,7 @@ builder.Services.AddSwaggerGen();
 // ÃÌº”JwtOptions≈‰÷√
 builder.Services.Configure<JwtTokenOptions>(builder.Configuration.GetSection("JWTTokenOptions"));
 builder.Services.AddSingleton<CustomJWTService, CustomHSJWTService>();
+builder.Services.AddAutoMapper(cfg=> { },typeof(AutoMapperConfigs));
 builder.InitSqlSugar();
 var app = builder.Build();
 

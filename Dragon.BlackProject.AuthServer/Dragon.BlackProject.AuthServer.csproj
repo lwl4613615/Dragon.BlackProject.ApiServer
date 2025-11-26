@@ -5,11 +5,15 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="AutoMapper" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
     <PackageReference Include="SqlSugarCore" />
     <PackageReference Include="Swashbuckle.AspNetCore" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Dragon.BlackProject.BusinessInterface\Dragon.BlackProject.BusinessInterface.csproj" />
     <ProjectReference Include="..\Dragon.BlackProject.Common\Dragon.BlackProject.Common.csproj" />
+    <ProjectReference Include="..\Dragon.BlackProject.ModelDtos\Dragon.BlackProject.ModelDtos.csproj" />
+    <ProjectReference Include="..\Dragon.BlackProject.Models\Dragon.BlackProject.Models.csproj" />
   </ItemGroup>
 </Project>

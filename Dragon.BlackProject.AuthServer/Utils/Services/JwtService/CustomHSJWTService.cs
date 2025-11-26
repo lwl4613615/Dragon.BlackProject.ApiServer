@@ -1,5 +1,6 @@
 ﻿using Dragon.BlackProject.AuthServer.Utils.models;
 using Dragon.BlackProject.Common.Jwt;
+using Dragon.BlackProject.ModelDtos.User;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -20,7 +21,7 @@ namespace Dragon.BlackProject.AuthServer.Utils.Services.JwtService
 
                 _jwtTokenOptions = jwt.CurrentValue;
         }   
-        public override string GenerateToken(User user, out string refreshToken)
+        public override string GenerateToken(SysUserInfo user, out string refreshToken)
         {
             if (_jwtTokenOptions.Type!=0)
             {

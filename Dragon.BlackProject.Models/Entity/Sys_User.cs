@@ -24,5 +24,23 @@ namespace Dragon.BlackProject.Models.Entity
         public string? Mobile { get; set; }
         [SugarColumn(IsNullable = true)]
         public string? Address { get; set; }
+
+        [SugarColumn(IsNullable = true)]
+        public string? Email { set; get; }
+        public string? QQ { set; get; }
+
+        [SugarColumn(IsNullable = true)]
+        public string? WeChat { set; get; }
+
+        public int Sex { set; get; }
+
+        /// <summary>
+        /// 用户头像
+        /// </summary>
+        [SugarColumn(IsNullable = true)]
+        public string? Imageurl { set; get; }
+
+        public DateTime LastLoginTime { set; get; }
+
     }
 }

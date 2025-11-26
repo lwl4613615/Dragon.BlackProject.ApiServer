@@ -6,6 +6,7 @@ namespace Dragon.BlackProject.Models.Entity
 {
     public abstract class Sys_BaseModel
     {
+        
         public DateTime CreateTime { get; set; }=DateTime.Now;
 
         [SugarColumn(IsNullable=true)]
@@ -14,7 +15,7 @@ namespace Dragon.BlackProject.Models.Entity
         /// <summary>
         /// 状态 0:正常 1:冻结 2:删除
         /// </summary>
-
+        [SugarColumn(ColumnName = "Status")]
         public int Status { get; set; }
     }
 }
