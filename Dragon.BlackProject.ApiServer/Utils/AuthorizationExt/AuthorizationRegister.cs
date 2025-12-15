@@ -1,6 +1,7 @@
 ﻿using Dragon.BlackProject.Common;
 using Dragon.BlackProject.Common.Jwt;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.Text.Json;
@@ -86,16 +87,19 @@ namespace Dragon.BlackProject.ApiServer.Utils.AuthorizationExt
                         context.Response.StatusCode = StatusCodes.Status200OK;
                         await context.Response.WriteAsync(payload);
 
-                    }
-
-
+                    }                   
 
                 };
             });
 
             // 添加授权服务
-            builder.Services.AddAuthorization();
-
+            builder.Services.AddAuthorization(options=>
+            {
+                options.AddPolicy("btnPolicy", policyBuilder => policyBuilder
+                .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
+                .AddRequirements(new MenuAuthorizeRequirement()));
+            });
+            builder.Services.AddTransient<IAuthorizationHandler, MenuAuthorizeHandler>();
             // 返回 builder 以支持链式调用
             return builder;
         }
