@@ -11,7 +11,7 @@
     <PackageReference Include="Swashbuckle.AspNetCore" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Dragon.BlackProject.BusinessInterface\Dragon.BlackProject.BusinessInterface.csproj" />
+    <ProjectReference Include="..\Dragon.BlackProject.BussinessService\Dragon.BlackProject.BussinessService.csproj" />
     <ProjectReference Include="..\Dragon.BlackProject.Common\Dragon.BlackProject.Common.csproj" />
     <ProjectReference Include="..\Dragon.BlackProject.ModelDtos\Dragon.BlackProject.ModelDtos.csproj" />
     <ProjectReference Include="..\Dragon.BlackProject.Models\Dragon.BlackProject.Models.csproj" />

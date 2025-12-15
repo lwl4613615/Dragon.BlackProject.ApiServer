@@ -7,4 +7,7 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Dragon.BlackProject.BusinessInterface\Dragon.BlackProject.BusinessInterface.csproj" />
+  </ItemGroup>
 </Project>
